@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <VtolVrPath Condition="'$(VtolVrPath)' == ''">D:\STEAM\steamapps\common\VTOL VR</VtolVrPath>
+    <ModLoaderPath Condition="'$(ModLoaderPath)' == ''">D:\STEAM\steamapps\common\VTOL VR Mod Loader</ModLoaderPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony"><HintPath>$(ModLoaderPath)\Managed\0Harmony.dll</HintPath></Reference>
+    <Reference Include="ModLoader.Framework"><HintPath>$(ModLoaderPath)\Managed\ModLoader.Framework.dll</HintPath></Reference>
+    <Reference Include="Assembly-CSharp"><HintPath>$(VtolVrPath)\VTOLVR_Data\Managed\Assembly-CSharp.dll</HintPath></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(VtolVrPath)\VTOLVR_Data\Managed\UnityEngine.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(VtolVrPath)\VTOLVR_Data\Managed\UnityEngine.CoreModule.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.UIModule"><HintPath>$(VtolVrPath)\VTOLVR_Data\Managed\UnityEngine.UIModule.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.UI"><HintPath>$(VtolVrPath)\VTOLVR_Data\Managed\UnityEngine.UI.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.TextRenderingModule"><HintPath>$(VtolVrPath)\VTOLVR_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath></Reference>
+  </ItemGroup>
+
+  <Target Name="StageModPackage" AfterTargets="Build">
+    <MakeDir Directories="$(MSBuildProjectDirectory)\Builds\RightCommsSubtitles" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(MSBuildProjectDirectory)\Builds\RightCommsSubtitles" />
+  </Target>
+</Project>

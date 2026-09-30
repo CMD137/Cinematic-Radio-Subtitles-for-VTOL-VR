@@ -1,0 +1,169 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Cmd137.RightCommsSubtitles
+{
+    public enum RadioSource
+    {
+        Tower,
+        Lso,
+        Awacs
+    }
+
+    public sealed class SubtitleService : MonoBehaviour
+    {
+        private const int MaxLines = 3;
+        private readonly List<ActiveSubtitle> lines = new List<ActiveSubtitle>();
+        private Canvas canvas;
+        private Text subtitleText;
+        private Camera attachedCamera;
+        private string displayedText = string.Empty;
+
+        public void Push(RadioSource source, string message, float seconds)
+        {
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                return;
+            }
+
+            var now = Time.unscaledTime;
+            var formatted = Format(source, message);
+            if (lines.Count > 0 && lines[0].Text == formatted)
+            {
+                lines[0].ExpiresAt = now + seconds;
+                return;
+            }
+
+            lines.Insert(0, new ActiveSubtitle(formatted, now + seconds));
+            if (lines.Count > MaxLines)
+            {
+                lines.RemoveAt(lines.Count - 1);
+            }
+
+            RefreshText();
+        }
+
+        private void Update()
+        {
+            EnsureOverlay();
+
+            var now = Time.unscaledTime;
+            var changed = false;
+            for (var index = lines.Count - 1; index >= 0; index--)
+            {
+                if (lines[index].ExpiresAt <= now)
+                {
+                    lines.RemoveAt(index);
+                    changed = true;
+                }
+            }
+
+            if (changed)
+            {
+                RefreshText();
+            }
+        }
+
+        private void EnsureOverlay()
+        {
+            var camera = Camera.main;
+            if (camera == null || camera == attachedCamera)
+            {
+                return;
+            }
+
+            if (canvas != null)
+            {
+                Destroy(canvas.gameObject);
+            }
+
+            attachedCamera = camera;
+            var root = new GameObject("RightCommsSubtitleOverlay", typeof(Canvas));
+            DontDestroyOnLoad(root);
+            root.transform.SetParent(camera.transform, false);
+            root.transform.localPosition = new Vector3(0.42f, 0.23f, 1.15f);
+            root.transform.localRotation = Quaternion.identity;
+            root.transform.localScale = Vector3.one * 0.001f;
+
+            canvas = root.GetComponent<Canvas>();
+            canvas.renderMode = RenderMode.WorldSpace;
+            canvas.worldCamera = camera;
+            var canvasRect = canvas.GetComponent<RectTransform>();
+            canvasRect.sizeDelta = new Vector2(720f, 260f);
+
+            var panel = new GameObject("Panel", typeof(Image));
+            panel.transform.SetParent(root.transform, false);
+            var panelRect = panel.GetComponent<RectTransform>();
+            panelRect.anchorMin = Vector2.zero;
+            panelRect.anchorMax = Vector2.one;
+            panelRect.offsetMin = Vector2.zero;
+            panelRect.offsetMax = Vector2.zero;
+            panel.GetComponent<Image>().color = new Color(0.015f, 0.025f, 0.035f, 0.68f);
+
+            var textObject = new GameObject("Text", typeof(Text));
+            textObject.transform.SetParent(panel.transform, false);
+            subtitleText = textObject.GetComponent<Text>();
+            subtitleText.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            subtitleText.fontSize = 32;
+            subtitleText.horizontalOverflow = HorizontalWrapMode.Wrap;
+            subtitleText.verticalOverflow = VerticalWrapMode.Overflow;
+            subtitleText.alignment = TextAnchor.UpperRight;
+            subtitleText.color = new Color(0.9f, 0.96f, 1f, 1f);
+            var textRect = subtitleText.rectTransform;
+            textRect.anchorMin = Vector2.zero;
+            textRect.anchorMax = Vector2.one;
+            textRect.offsetMin = new Vector2(20f, 16f);
+            textRect.offsetMax = new Vector2(-20f, -16f);
+
+            subtitleText.text = displayedText;
+        }
+
+        private void RefreshText()
+        {
+            displayedText = string.Join("\n\n", lines.ConvertAll(line => line.Text).ToArray());
+            if (subtitleText != null)
+            {
+                subtitleText.text = displayedText;
+            }
+        }
+
+        private static string Format(RadioSource source, string message)
+        {
+            return string.Format("<b><color=#{0}>{1}</color></b>  {2}", SourceColor(source), SourceName(source), message);
+        }
+
+        private static string SourceName(RadioSource source)
+        {
+            switch (source)
+            {
+                case RadioSource.Awacs: return "AWACS";
+                case RadioSource.Lso: return "LSO";
+                default: return "TOWER";
+            }
+        }
+
+        private static string SourceColor(RadioSource source)
+        {
+            switch (source)
+            {
+                case RadioSource.Awacs: return "83D7FF";
+                case RadioSource.Lso: return "FFD27D";
+                default: return "B8EFA6";
+            }
+        }
+
+        private sealed class ActiveSubtitle
+        {
+            public readonly string Text;
+            public float ExpiresAt;
+
+            public ActiveSubtitle(string text, float expiresAt)
+            {
+                Text = text;
+                ExpiresAt = expiresAt;
+            }
+        }
+    }
+}
