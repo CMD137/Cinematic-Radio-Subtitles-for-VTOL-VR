@@ -1,15 +1,14 @@
 # Cinematic Radio Subtitles
 
 An independent VTOL VR Mod Loader mod that presents original English NPC radio
-transcripts in a compact, DCS-inspired panel at the upper-right of the pilot's
-view.
+transcripts as cinematic, stereo-safe subtitles in the pilot's view.
 
 ## v1.0 scope
 
 - Tower / LSO radio calls
 - AWACS calls, compacted into readable BRAA or Bullseye lines
-- A camera-relative, stereo-safe panel rather than the built-in tutorial label
-- Up to three recent transmissions, with priority-aware replacement
+- A camera-relative, stereo-safe overlay rather than the built-in tutorial label
+- One current transmission at a time, styled as a two-line cinema subtitle
 
 ## Build
 
@@ -23,7 +22,7 @@ dotnet build -p:VtolVrPath='E:\\SteamLibrary\\steamapps\\common\\VTOL VR' -p:Mod
 For local testing, create this folder in the VTOL VR game directory:
 
 ```text
-@Mod Loader\\Mods\\RightCommsSubtitles
+@Mod Loader\\Mods\\CinematicRadioSubtitles
 ```
 
 Copy both `Builds\\CinematicRadioSubtitles\\item.json` and
@@ -36,4 +35,9 @@ the loader's **Play** button.
 This project has its own overlay, queue, presentation rules, and event
 handlers. Radio wording is an English transcript of the game's audio; it does
 not reuse another mod's source code or UI.
+
+## Workshop artwork
+
+Use `Assets\\workshop-cover-v1.0.jpg` as the thumbnail in **VTOL VR Mod
+Uploader**. It is 0.24 MB, within Steam's 1 MB thumbnail limit.
 
