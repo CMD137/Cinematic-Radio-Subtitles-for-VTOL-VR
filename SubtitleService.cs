@@ -110,7 +110,7 @@ namespace Cmd137.CinematicRadioSubtitles
             subtitleText.lineSpacing = 0.82f;
             subtitleText.horizontalOverflow = HorizontalWrapMode.Wrap;
             subtitleText.verticalOverflow = VerticalWrapMode.Overflow;
-            subtitleText.alignment = TextAnchor.UpperCenter;
+            subtitleText.alignment = TextAnchor.MiddleCenter;
             subtitleText.color = new Color(0.9f, 0.96f, 1f, 1f);
 
             // Keep the view unobstructed. A subtle outline keeps floating text
@@ -121,8 +121,8 @@ namespace Cmd137.CinematicRadioSubtitles
             outline.useGraphicAlpha = false;
 
             var textRect = subtitleText.rectTransform;
-            // Reserve 13%–27% of the view height: the two-line subtitle is
-            // centered at roughly 20% above the bottom edge in VR.
+            // Reserve 13%–27% of the view height. MiddleCenter places the
+            // two-line subtitle around 20% above the bottom edge in VR.
             textRect.anchorMin = new Vector2(0.1f, 0.13f);
             textRect.anchorMax = new Vector2(0.9f, 0.27f);
             textRect.offsetMin = Vector2.zero;
