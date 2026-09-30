@@ -121,8 +121,8 @@ namespace Cmd137.CinematicRadioSubtitles
             outline.useGraphicAlpha = false;
 
             var textRect = subtitleText.rectTransform;
-            textRect.anchorMin = new Vector2(0.1f, 0.025f);
-            textRect.anchorMax = new Vector2(0.9f, 0.17f);
+            textRect.anchorMin = new Vector2(0.1f, 0.055f);
+            textRect.anchorMax = new Vector2(0.9f, 0.20f);
             textRect.offsetMin = Vector2.zero;
             textRect.offsetMax = Vector2.zero;
 
