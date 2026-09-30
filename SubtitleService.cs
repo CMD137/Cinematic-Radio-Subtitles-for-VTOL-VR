@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Cmd137.RightCommsSubtitles
+namespace Cmd137.CinematicRadioSubtitles
 {
     public enum RadioSource
     {
@@ -81,7 +81,7 @@ namespace Cmd137.RightCommsSubtitles
             }
 
             attachedCamera = camera;
-            var root = new GameObject("RightCommsSubtitleOverlay", typeof(Canvas));
+            var root = new GameObject("CinematicRadioSubtitleOverlay", typeof(Canvas));
             DontDestroyOnLoad(root);
             // Screen-space camera UI remains stereo-aware while being placed
             // in front of cockpit geometry rather than behind its depth buffer.
@@ -121,8 +121,8 @@ namespace Cmd137.RightCommsSubtitles
             outline.useGraphicAlpha = false;
 
             var textRect = subtitleText.rectTransform;
-            textRect.anchorMin = new Vector2(0.1f, 0.07f);
-            textRect.anchorMax = new Vector2(0.9f, 0.24f);
+            textRect.anchorMin = new Vector2(0.1f, 0.025f);
+            textRect.anchorMax = new Vector2(0.9f, 0.17f);
             textRect.offsetMin = Vector2.zero;
             textRect.offsetMax = Vector2.zero;
 

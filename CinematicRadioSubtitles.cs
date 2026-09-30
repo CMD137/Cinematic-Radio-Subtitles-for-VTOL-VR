@@ -2,10 +2,10 @@ using ModLoader.Framework;
 using ModLoader.Framework.Attributes;
 using UnityEngine;
 
-namespace Cmd137.RightCommsSubtitles
+namespace Cmd137.CinematicRadioSubtitles
 {
-    [ItemId("cmd137.right-comms-subtitles")]
-    public sealed class RightCommsSubtitles : VtolMod
+    [ItemId("cmd137.cinematic-radio-subtitles")]
+    public sealed class CinematicRadioSubtitles : VtolMod
     {
         public static SubtitleService Subtitles { get; private set; }
 
@@ -13,7 +13,7 @@ namespace Cmd137.RightCommsSubtitles
         {
             Subtitles = gameObject.AddComponent<SubtitleService>();
             DontDestroyOnLoad(gameObject);
-            Debug.Log("Right Comms Subtitles v1.0 loaded.");
+            Debug.Log("Cinematic Radio Subtitles v1.0 loaded.");
         }
 
         public override void UnLoad()
@@ -23,7 +23,7 @@ namespace Cmd137.RightCommsSubtitles
                 Destroy(Subtitles);
             }
 
-            Debug.Log("Right Comms Subtitles unloaded.");
+            Debug.Log("Cinematic Radio Subtitles unloaded.");
         }
     }
 }

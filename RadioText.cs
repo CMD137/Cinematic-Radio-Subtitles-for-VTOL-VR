@@ -1,30 +1,30 @@
 using UnityEngine;
 
-namespace Cmd137.RightCommsSubtitles
+namespace Cmd137.CinematicRadioSubtitles
 {
     internal static class RadioText
     {
         internal static void Tower(string message, float duration = 5f)
         {
-            if (RightCommsSubtitles.Subtitles != null)
+            if (CinematicRadioSubtitles.Subtitles != null)
             {
-                RightCommsSubtitles.Subtitles.Push(RadioSource.Tower, message, duration);
+                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Tower, message, duration);
             }
         }
 
         internal static void Lso(string message, float duration = 2.5f)
         {
-            if (RightCommsSubtitles.Subtitles != null)
+            if (CinematicRadioSubtitles.Subtitles != null)
             {
-                RightCommsSubtitles.Subtitles.Push(RadioSource.Lso, message, duration);
+                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Lso, message, duration);
             }
         }
 
         internal static void Awacs(string message, float duration = 8f)
         {
-            if (RightCommsSubtitles.Subtitles != null)
+            if (CinematicRadioSubtitles.Subtitles != null)
             {
-                RightCommsSubtitles.Subtitles.Push(RadioSource.Awacs, message, duration);
+                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Awacs, message, duration);
             }
         }
 

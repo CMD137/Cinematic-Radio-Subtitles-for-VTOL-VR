@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <Target Name="StageModPackage" AfterTargets="Build">
-    <MakeDir Directories="$(MSBuildProjectDirectory)\Builds\RightCommsSubtitles" />
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(MSBuildProjectDirectory)\Builds\RightCommsSubtitles" />
+    <MakeDir Directories="$(MSBuildProjectDirectory)\Builds\CinematicRadioSubtitles" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(MSBuildProjectDirectory)\Builds\CinematicRadioSubtitles" />
   </Target>
 </Project>

@@ -1,4 +1,4 @@
-# Right Comms Subtitles
+# Cinematic Radio Subtitles
 
 An independent VTOL VR Mod Loader mod that presents original English NPC radio
 transcripts in a compact, DCS-inspired panel at the upper-right of the pilot's
@@ -26,8 +26,8 @@ For local testing, create this folder in the VTOL VR game directory:
 @Mod Loader\\Mods\\RightCommsSubtitles
 ```
 
-Copy both `Builds\\RightCommsSubtitles\\item.json` and
-`Builds\\RightCommsSubtitles\\RightCommsSubtitles.dll` into it. Start **VTOL VR
+Copy both `Builds\\CinematicRadioSubtitles\\item.json` and
+`Builds\\CinematicRadioSubtitles\\CinematicRadioSubtitles.dll` into it. Start **VTOL VR
 Mod Loader** (not the base game), enable the local item in its list, then use
 the loader's **Play** button.
 

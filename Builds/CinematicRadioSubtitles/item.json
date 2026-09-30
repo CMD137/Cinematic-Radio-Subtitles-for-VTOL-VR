@@ -1,13 +1,13 @@
 {
-  "Title": "Right Comms Subtitles",
-  "Description": "DCS-style upper-right English radio subtitles for VTOL VR tower and AWACS calls.",
+  "Title": "Cinematic Radio Subtitles",
+  "Description": "Cinematic-style subtitles for VTOL VR radio communications.",
   "Tags": ["UI", "Accessibility"],
   "Owner": {
     "Name": "cmd137"
   },
   "PublishFieldId": 0,
   "MetaData": {
-    "DllName": "RightCommsSubtitles.dll",
+    "DllName": "CinematicRadioSubtitles.dll",
     "AllowLoadOnStart": true,
     "ShowOnMainList": true
   },

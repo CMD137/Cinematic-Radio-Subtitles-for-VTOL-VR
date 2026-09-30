@@ -3,7 +3,7 @@ using System.Text;
 using HarmonyLib;
 using UnityEngine;
 
-namespace Cmd137.RightCommsSubtitles
+namespace Cmd137.CinematicRadioSubtitles
 {
     [HarmonyPatch(typeof(AWACSVoiceProfile), "ReportHostile")]
     internal static class ReportHostilePatch

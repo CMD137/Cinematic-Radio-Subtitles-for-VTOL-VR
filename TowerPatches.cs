@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace Cmd137.RightCommsSubtitles
+namespace Cmd137.CinematicRadioSubtitles
 {
     [HarmonyPatch(typeof(ATCVoiceProfile), "PlayTaxiToRunwayMsg")]
     internal static class TaxiToRunwayPatch
