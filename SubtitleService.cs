@@ -91,26 +91,26 @@ namespace Cmd137.RightCommsSubtitles
             canvas.renderMode = RenderMode.WorldSpace;
             canvas.worldCamera = camera;
             var canvasRect = canvas.GetComponent<RectTransform>();
-            canvasRect.sizeDelta = new Vector2(720f, 260f);
-
-            var panel = new GameObject("Panel", typeof(Image));
-            panel.transform.SetParent(root.transform, false);
-            var panelRect = panel.GetComponent<RectTransform>();
-            panelRect.anchorMin = Vector2.zero;
-            panelRect.anchorMax = Vector2.one;
-            panelRect.offsetMin = Vector2.zero;
-            panelRect.offsetMax = Vector2.zero;
-            panel.GetComponent<Image>().color = new Color(0.015f, 0.025f, 0.035f, 0.68f);
+            canvasRect.sizeDelta = new Vector2(860f, 260f);
 
             var textObject = new GameObject("Text", typeof(Text));
-            textObject.transform.SetParent(panel.transform, false);
+            textObject.transform.SetParent(root.transform, false);
             subtitleText = textObject.GetComponent<Text>();
             subtitleText.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-            subtitleText.fontSize = 32;
+            subtitleText.fontSize = 28;
+            subtitleText.lineSpacing = 0.88f;
             subtitleText.horizontalOverflow = HorizontalWrapMode.Wrap;
             subtitleText.verticalOverflow = VerticalWrapMode.Overflow;
             subtitleText.alignment = TextAnchor.UpperRight;
             subtitleText.color = new Color(0.9f, 0.96f, 1f, 1f);
+
+            // Keep the view unobstructed. A subtle outline keeps floating text
+            // legible over bright sky, terrain, and cockpit glass without a panel.
+            var outline = textObject.AddComponent<Outline>();
+            outline.effectColor = new Color(0f, 0f, 0f, 0.82f);
+            outline.effectDistance = new Vector2(1.25f, -1.25f);
+            outline.useGraphicAlpha = false;
+
             var textRect = subtitleText.rectTransform;
             textRect.anchorMin = Vector2.zero;
             textRect.anchorMax = Vector2.one;
