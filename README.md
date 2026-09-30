@@ -20,8 +20,16 @@ Loader is installed elsewhere, override them when building:
 dotnet build -p:VtolVrPath='E:\\SteamLibrary\\steamapps\\common\\VTOL VR' -p:ModLoaderPath='E:\\SteamLibrary\\steamapps\\common\\VTOL VR Mod Loader'
 ```
 
-Copy `bin\\Debug\\netstandard2.0\\RightCommsSubtitles.dll` into a new folder
-under the Mod Loader's `Mods` directory, then enable the mod from the loader.
+For local testing, create this folder in the VTOL VR game directory:
+
+```text
+@Mod Loader\\Mods\\RightCommsSubtitles
+```
+
+Copy both `Builds\\RightCommsSubtitles\\item.json` and
+`Builds\\RightCommsSubtitles\\RightCommsSubtitles.dll` into it. Start **VTOL VR
+Mod Loader** (not the base game), enable the local item in its list, then use
+the loader's **Play** button.
 
 ## Notes
 
