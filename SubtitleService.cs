@@ -83,16 +83,24 @@ namespace Cmd137.RightCommsSubtitles
             attachedCamera = camera;
             var root = new GameObject("RightCommsSubtitleOverlay", typeof(Canvas));
             DontDestroyOnLoad(root);
-            root.transform.SetParent(camera.transform, false);
-            root.transform.localPosition = new Vector3(0f, -0.31f, 1.15f);
+            // Screen-space camera UI remains stereo-aware while being placed
+            // in front of cockpit geometry rather than behind its depth buffer.
+            root.transform.SetParent(null, false);
+            root.transform.localPosition = Vector3.zero;
             root.transform.localRotation = Quaternion.identity;
-            root.transform.localScale = Vector3.one * 0.001f;
+            root.transform.localScale = Vector3.one;
 
             canvas = root.GetComponent<Canvas>();
-            canvas.renderMode = RenderMode.WorldSpace;
+            canvas.renderMode = RenderMode.ScreenSpaceCamera;
             canvas.worldCamera = camera;
+            canvas.planeDistance = Mathf.Max(camera.nearClipPlane + 0.01f, 0.02f);
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = short.MaxValue;
             var canvasRect = canvas.GetComponent<RectTransform>();
-            canvasRect.sizeDelta = new Vector2(1100f, 180f);
+            canvasRect.anchorMin = Vector2.zero;
+            canvasRect.anchorMax = Vector2.one;
+            canvasRect.offsetMin = Vector2.zero;
+            canvasRect.offsetMax = Vector2.zero;
 
             var textObject = new GameObject("Text", typeof(Text));
             textObject.transform.SetParent(root.transform, false);
@@ -113,10 +121,10 @@ namespace Cmd137.RightCommsSubtitles
             outline.useGraphicAlpha = false;
 
             var textRect = subtitleText.rectTransform;
-            textRect.anchorMin = Vector2.zero;
-            textRect.anchorMax = Vector2.one;
-            textRect.offsetMin = new Vector2(30f, 12f);
-            textRect.offsetMax = new Vector2(-30f, -12f);
+            textRect.anchorMin = new Vector2(0.1f, 0.07f);
+            textRect.anchorMax = new Vector2(0.9f, 0.24f);
+            textRect.offsetMin = Vector2.zero;
+            textRect.offsetMax = Vector2.zero;
 
             subtitleText.text = displayedText;
         }
