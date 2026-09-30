@@ -1,6 +1,6 @@
 {
   "Title": "Cinematic Radio Subtitles",
-  "Description": "Cinematic-style subtitles for VTOL VR radio communications.",
+  "Description": "Cinematic, stereo-safe subtitles for original English Tower, LSO, and AWACS radio calls. AWACS reports are compacted for quick in-flight reference; more roles are planned. Source: https://github.com/CMD137/Cinematic-Radio-Subtitles-for-VTOL-VR",
   "Tags": ["UI", "Accessibility"],
   "Owner": {
     "Name": "CMD137"
