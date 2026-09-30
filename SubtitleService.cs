@@ -121,8 +121,10 @@ namespace Cmd137.CinematicRadioSubtitles
             outline.useGraphicAlpha = false;
 
             var textRect = subtitleText.rectTransform;
-            textRect.anchorMin = new Vector2(0.1f, 0.055f);
-            textRect.anchorMax = new Vector2(0.9f, 0.20f);
+            // Reserve 13%–27% of the view height: the two-line subtitle is
+            // centered at roughly 20% above the bottom edge in VR.
+            textRect.anchorMin = new Vector2(0.1f, 0.13f);
+            textRect.anchorMax = new Vector2(0.9f, 0.27f);
             textRect.offsetMin = Vector2.zero;
             textRect.offsetMax = Vector2.zero;
 
