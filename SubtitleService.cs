@@ -14,7 +14,8 @@ namespace Cmd137.RightCommsSubtitles
 
     public sealed class SubtitleService : MonoBehaviour
     {
-        private const int MaxLines = 3;
+        // Cinema-style subtitles deliberately show only the current transmission.
+        private const int MaxLines = 1;
         private readonly List<ActiveSubtitle> lines = new List<ActiveSubtitle>();
         private Canvas canvas;
         private Text subtitleText;
@@ -83,7 +84,7 @@ namespace Cmd137.RightCommsSubtitles
             var root = new GameObject("RightCommsSubtitleOverlay", typeof(Canvas));
             DontDestroyOnLoad(root);
             root.transform.SetParent(camera.transform, false);
-            root.transform.localPosition = new Vector3(0.42f, 0.23f, 1.15f);
+            root.transform.localPosition = new Vector3(0f, -0.31f, 1.15f);
             root.transform.localRotation = Quaternion.identity;
             root.transform.localScale = Vector3.one * 0.001f;
 
@@ -91,17 +92,17 @@ namespace Cmd137.RightCommsSubtitles
             canvas.renderMode = RenderMode.WorldSpace;
             canvas.worldCamera = camera;
             var canvasRect = canvas.GetComponent<RectTransform>();
-            canvasRect.sizeDelta = new Vector2(860f, 260f);
+            canvasRect.sizeDelta = new Vector2(1100f, 180f);
 
             var textObject = new GameObject("Text", typeof(Text));
             textObject.transform.SetParent(root.transform, false);
             subtitleText = textObject.GetComponent<Text>();
             subtitleText.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-            subtitleText.fontSize = 28;
-            subtitleText.lineSpacing = 0.88f;
+            subtitleText.fontSize = 30;
+            subtitleText.lineSpacing = 0.82f;
             subtitleText.horizontalOverflow = HorizontalWrapMode.Wrap;
             subtitleText.verticalOverflow = VerticalWrapMode.Overflow;
-            subtitleText.alignment = TextAnchor.UpperRight;
+            subtitleText.alignment = TextAnchor.UpperCenter;
             subtitleText.color = new Color(0.9f, 0.96f, 1f, 1f);
 
             // Keep the view unobstructed. A subtle outline keeps floating text
@@ -114,8 +115,8 @@ namespace Cmd137.RightCommsSubtitles
             var textRect = subtitleText.rectTransform;
             textRect.anchorMin = Vector2.zero;
             textRect.anchorMax = Vector2.one;
-            textRect.offsetMin = new Vector2(20f, 16f);
-            textRect.offsetMax = new Vector2(-20f, -16f);
+            textRect.offsetMin = new Vector2(30f, 12f);
+            textRect.offsetMax = new Vector2(-30f, -12f);
 
             subtitleText.text = displayedText;
         }
@@ -131,7 +132,7 @@ namespace Cmd137.RightCommsSubtitles
 
         private static string Format(RadioSource source, string message)
         {
-            return string.Format("<b><color=#{0}>{1}</color></b>  {2}", SourceColor(source), SourceName(source), message);
+            return string.Format("<b><color=#{0}>{1}</color></b>\n{2}", SourceColor(source), SourceName(source), message);
         }
 
         private static string SourceName(RadioSource source)
