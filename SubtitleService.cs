@@ -19,6 +19,7 @@ namespace Cmd137.CinematicRadioSubtitles
         private readonly List<ActiveSubtitle> lines = new List<ActiveSubtitle>();
         private Canvas canvas;
         private Text subtitleText;
+        private Material subtitleMaterial;
         private Camera attachedCamera;
         private string displayedText = string.Empty;
 
@@ -80,6 +81,12 @@ namespace Cmd137.CinematicRadioSubtitles
                 Destroy(canvas.gameObject);
             }
 
+            if (subtitleMaterial != null)
+            {
+                Destroy(subtitleMaterial);
+                subtitleMaterial = null;
+            }
+
             attachedCamera = camera;
             var root = new GameObject("CinematicRadioSubtitleOverlay", typeof(Canvas));
             DontDestroyOnLoad(root);
@@ -93,7 +100,10 @@ namespace Cmd137.CinematicRadioSubtitles
             canvas = root.GetComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceCamera;
             canvas.worldCamera = camera;
-            canvas.planeDistance = Mathf.Max(camera.nearClipPlane + 0.01f, 0.02f);
+            // A near-clip subtitle plane produces excessive stereo disparity:
+            // each eye sees a different slice of the text. Place it at a
+            // comfortable virtual distance so the headset can fuse both eyes.
+            canvas.planeDistance = Mathf.Max(1.5f, camera.nearClipPlane + 0.01f);
             canvas.overrideSorting = true;
             canvas.sortingOrder = short.MaxValue;
             var canvasRect = canvas.GetComponent<RectTransform>();
@@ -112,6 +122,16 @@ namespace Cmd137.CinematicRadioSubtitles
             subtitleText.verticalOverflow = VerticalWrapMode.Overflow;
             subtitleText.alignment = TextAnchor.LowerCenter;
             subtitleText.color = new Color(0.9f, 0.96f, 1f, 1f);
+
+            // ScreenSpaceCamera gives the text a comfortable stereo depth.
+            // This built-in GUI shader keeps it visible over cockpit geometry.
+            var overlayShader = Shader.Find("GUI/Text Shader");
+            if (overlayShader != null)
+            {
+                subtitleMaterial = new Material(overlayShader);
+                subtitleMaterial.mainTexture = subtitleText.font.material.mainTexture;
+                subtitleText.material = subtitleMaterial;
+            }
 
             // Keep the view unobstructed. A subtle outline keeps floating text
             // legible over bright sky, terrain, and cockpit glass without a panel.
