@@ -123,8 +123,8 @@ namespace Cmd137.CinematicRadioSubtitles
             var textRect = subtitleText.rectTransform;
             // Keep the subtitle baseline at 20% of the VR view; when the
             // message wraps, additional lines grow upward into this safe area.
-            textRect.anchorMin = new Vector2(0.1f, 0.24f);
-            textRect.anchorMax = new Vector2(0.9f, 0.38f);
+            textRect.anchorMin = new Vector2(0.1f, 0.44f);
+            textRect.anchorMax = new Vector2(0.9f, 0.58f);
             textRect.offsetMin = Vector2.zero;
             textRect.offsetMax = Vector2.zero;
 
