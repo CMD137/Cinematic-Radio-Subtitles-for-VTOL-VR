@@ -10,7 +10,7 @@ namespace Cmd137.RightCommsSubtitles
     {
         private static void Postfix(Vector3 pos, Vector3 velocity, bool braaOnly)
         {
-            RadioText.Awacs(RadioText.Braa(AwacsFormatting.ReferencePosition(braaOnly), pos, velocity, "HOSTILE"));
+            RadioText.Awacs(RadioText.Braa(AwacsFormatting.ReferencePosition(braaOnly), pos, velocity, "HOSTILE", AwacsFormatting.GeometryLabel(braaOnly)));
         }
     }
 
@@ -19,7 +19,7 @@ namespace Cmd137.RightCommsSubtitles
     {
         private static void Postfix(Vector3 pos, Vector3 velocity, bool braaOnly)
         {
-            RadioText.Awacs(RadioText.Braa(AwacsFormatting.ReferencePosition(braaOnly), pos, velocity, "GROUP"));
+            RadioText.Awacs(RadioText.Braa(AwacsFormatting.ReferencePosition(braaOnly), pos, velocity, "GROUP", AwacsFormatting.GeometryLabel(braaOnly)));
         }
     }
 
@@ -99,6 +99,13 @@ namespace Cmd137.RightCommsSubtitles
             return PlayerPosition();
         }
 
+        internal static string GeometryLabel(bool braaOnly)
+        {
+            return !braaOnly && WaypointManager.instance != null && WaypointManager.instance.bullseye != null
+                ? "BULLSEYE"
+                : "BRAA";
+        }
+
         internal static Vector3 PlayerPosition()
         {
             return FlightSceneManager.instance != null && FlightSceneManager.instance.playerActor != null
@@ -115,13 +122,14 @@ namespace Cmd137.RightCommsSubtitles
 
             var text = new StringBuilder(title);
             var reference = ReferencePosition(false);
+            var geometryLabel = GeometryLabel(false);
             var last = Mathf.Min(groups.Count, offset + count);
             for (var index = offset; index < last; index++)
             {
                 var group = groups[index];
                 var subject = group.count > 1 ? "GROUP" : "HOSTILE";
                 text.Append("\n");
-                text.Append(RadioText.Braa(reference, group.globalPos.point, group.velocity, subject));
+                text.Append(RadioText.Braa(reference, group.globalPos.point, group.velocity, subject, geometryLabel));
             }
 
             return text.ToString();

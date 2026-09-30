@@ -52,7 +52,7 @@ namespace Cmd137.RightCommsSubtitles
             }
         }
 
-        internal static string Braa(Vector3 reference, Vector3 target, Vector3 velocity, string subject)
+        internal static string Braa(Vector3 reference, Vector3 target, Vector3 velocity, string subject, string geometryLabel = "BRAA")
         {
             var bearing = Mathf.RoundToInt(VectorUtils.Bearing(reference, target)).ToString("000");
             var range = Vector3.ProjectOnPlane(reference - target, Vector3.up).magnitude;
@@ -65,7 +65,7 @@ namespace Cmd137.RightCommsSubtitles
             var altitude = WaterPhysics.GetAltitude(target);
             var convertedAltitude = MeasurementManager.instance.ConvertedAltitude(altitude);
             var aspect = Aspect(target, velocity);
-            return string.Format("{0} BRAA {1} / {2:0.#} / {3:0} / {4}", subject, bearing, distance, convertedAltitude, aspect);
+            return string.Format("{0} {1} {2} / {3:0.#} / {4:0} / {5}", subject, geometryLabel, bearing, distance, convertedAltitude, aspect);
         }
 
         private static string Aspect(Vector3 position, Vector3 velocity)
