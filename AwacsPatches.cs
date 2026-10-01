@@ -87,6 +87,39 @@ namespace Cmd137.CinematicRadioSubtitles
         }
     }
 
+    [HarmonyPatch(typeof(AWACSVoiceProfile), "ReportPopups", new[]
+    {
+        typeof(bool), typeof(Vector3), typeof(Vector3),
+        typeof(bool), typeof(Vector3), typeof(Vector3),
+        typeof(bool), typeof(Vector3), typeof(Vector3), typeof(int)
+    })]
+    internal static class ReportLegacyPopupsPatch
+    {
+        private static void Postfix(bool grpA, Vector3 gPosA, Vector3 velA, bool grpB, Vector3 gPosB, Vector3 velB, bool grpC, Vector3 gPosC, Vector3 velC, int count)
+        {
+            RadioText.Awacs(AwacsFormatting.BuildPopupList(grpA, gPosA, velA, grpB, gPosB, velB, grpC, gPosC, velC, count), 11f);
+        }
+    }
+
+    [HarmonyPatch(typeof(AWACSVoiceProfile), "ReportThreatToAwacs")]
+    internal static class ThreatToAwacsPatch
+    {
+        private static void Postfix(int count, Vector3 pos, Vector3 velocity)
+        {
+            var subject = count > 1 ? "GROUP" : "HOSTILE";
+            RadioText.Awacs(RadioText.Braa(AwacsFormatting.PlayerPosition(), pos, velocity, subject) + "\nLEANS ON.");
+        }
+    }
+
+    [HarmonyPatch(typeof(AWACSVoiceProfile), "ReportUnable")]
+    internal static class AwacsUnablePatch
+    {
+        private static void Postfix()
+        {
+            RadioText.Awacs(RadioText.Callsign() + ", UNABLE.");
+        }
+    }
+
     internal static class AwacsFormatting
     {
         internal static Vector3 ReferencePosition(bool braaOnly)
@@ -130,6 +163,29 @@ namespace Cmd137.CinematicRadioSubtitles
                 var subject = group.count > 1 ? "GROUP" : "HOSTILE";
                 text.Append("\n");
                 text.Append(RadioText.Braa(reference, group.globalPos.point, group.velocity, subject, geometryLabel));
+            }
+
+            return text.ToString();
+        }
+
+        internal static string BuildPopupList(bool grpA, Vector3 gPosA, Vector3 velA, bool grpB, Vector3 gPosB, Vector3 velB, bool grpC, Vector3 gPosC, Vector3 velC, int count)
+        {
+            var text = new StringBuilder("POPUP");
+            var reference = ReferencePosition(false);
+            var limit = Mathf.Clamp(count, 0, 3);
+            if (limit > 0)
+            {
+                text.Append("\n").Append(RadioText.Braa(reference, gPosA, velA, grpA ? "GROUP" : "HOSTILE", GeometryLabel(false)));
+            }
+
+            if (limit > 1)
+            {
+                text.Append("\n").Append(RadioText.Braa(reference, gPosB, velB, grpB ? "GROUP" : "HOSTILE", GeometryLabel(false)));
+            }
+
+            if (limit > 2)
+            {
+                text.Append("\n").Append(RadioText.Braa(reference, gPosC, velC, grpC ? "GROUP" : "HOSTILE", GeometryLabel(false)));
             }
 
             return text.ToString();

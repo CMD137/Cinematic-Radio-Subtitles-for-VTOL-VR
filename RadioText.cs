@@ -4,28 +4,43 @@ namespace Cmd137.CinematicRadioSubtitles
 {
     internal static class RadioText
     {
-        internal static void Tower(string message, float duration = 5f)
+        internal static void Tower(string message, float? minimumDuration = null)
         {
             if (CinematicRadioSubtitles.Subtitles != null)
             {
-                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Tower, message, duration);
+                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Tower, message, DurationFor(message, minimumDuration, 5f, 14f));
             }
         }
 
-        internal static void Lso(string message, float duration = 2.5f)
+        internal static void Lso(string message, float? minimumDuration = null)
         {
             if (CinematicRadioSubtitles.Subtitles != null)
             {
-                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Lso, message, duration);
+                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Lso, message, DurationFor(message, minimumDuration, 3f, 8f));
             }
         }
 
-        internal static void Awacs(string message, float duration = 8f)
+        internal static void Awacs(string message, float? minimumDuration = null)
         {
             if (CinematicRadioSubtitles.Subtitles != null)
             {
-                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Awacs, message, duration);
+                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Awacs, message, DurationFor(message, minimumDuration, 6f, 16f));
             }
+        }
+
+        // Voice clips are not exposed with a useful duration at each supported
+        // dispatch point. Use a reading-time estimate and let explicit values
+        // act as a floor for unusually important calls.
+        private static float DurationFor(string message, float? minimumDuration, float minimum, float maximum)
+        {
+            var words = message.Split(new[] { ' ', '\n', '/', ',', '.', ';', ':', '!', '?' }, System.StringSplitOptions.RemoveEmptyEntries).Length;
+            var estimated = 2f + words * 0.45f;
+            if (minimumDuration.HasValue)
+            {
+                estimated = Mathf.Max(estimated, minimumDuration.Value);
+            }
+
+            return Mathf.Clamp(estimated, minimum, maximum);
         }
 
         internal static string Callsign()

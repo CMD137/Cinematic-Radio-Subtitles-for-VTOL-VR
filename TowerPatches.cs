@@ -48,6 +48,60 @@ namespace Cmd137.CinematicRadioSubtitles
         }
     }
 
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLandingPatternFullMsg")]
+    internal static class LandingPatternFullPatch
+    {
+        private static void Postfix()
+        {
+            RadioText.Tower(RadioText.Callsign() + ", landing pattern full.");
+        }
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayCancelledRequestMsg")]
+    internal static class CancelledRequestPatch
+    {
+        private static void Postfix()
+        {
+            RadioText.Tower(RadioText.Callsign() + ", request cancelled.");
+        }
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayUnableMsg")]
+    internal static class UnablePatch
+    {
+        private static void Postfix()
+        {
+            RadioText.Tower(RadioText.Callsign() + ", unable.");
+        }
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLandedBeforeClearanceMsg")]
+    internal static class LandedBeforeClearancePatch
+    {
+        private static void Postfix()
+        {
+            RadioText.Tower(RadioText.Callsign() + ", you landed before receiving clearance.");
+        }
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLandedElseWhereMsg")]
+    internal static class LandedElsewherePatch
+    {
+        private static void Postfix()
+        {
+            RadioText.Tower(RadioText.Callsign() + ", you landed at the wrong airfield.");
+        }
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayRequestedWrongATCMsg")]
+    internal static class WrongAtcPatch
+    {
+        private static void Postfix()
+        {
+            RadioText.Tower(RadioText.Callsign() + ", you contacted the wrong tower.");
+        }
+    }
+
     [HarmonyPatch(typeof(ATCVoiceProfile), "PlayVerticalLandingFlyHeadingMsg")]
     internal static class VerticalHeadingPatch
     {
