@@ -11,7 +11,7 @@ Steam Workshop: <https://steamcommunity.com/sharedfiles/filedetails/?id=38107889
 
 Chinese README: [README-zh.md](README-zh.md)
 
-## v1.2
+## v1.2.1
 
 - Tower and LSO calls
 - AWACS calls, with compact BRAA and Bullseye-style formatting where possible
@@ -19,9 +19,10 @@ Chinese README: [README-zh.md](README-zh.md)
   wrong tower, landed-before-clearance, and wrong-airfield calls
 - The remaining AWACS report paths, including threat, unable, and legacy popup
   reports
-- Reading-time subtitle duration: length now follows the amount of English
-  text, plus 2 seconds for Tower / LSO calls and 4 seconds for AWACS calls
+- Extended reading-time subtitle durations: Tower / Ground Crew 7-16 seconds,
+  LSO 5-10 seconds, and AWACS 10-20 seconds
 - Carrier landing clearance and all close-in LSO correction calls
+- Carrier catapult wait-for-clearance call
 - Ground crew rearming calls, including station, engine, disarm, completion,
   and return-to-vehicle messages
 - A two-line subtitle: coloured speaker label plus the current radio message

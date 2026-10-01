@@ -33,6 +33,7 @@ The game's player-landing routines call these branches alongside the already cov
 | `PlayLandingClearedForRunwayMsg` | `{callsign}, cleared to land, runway {runway}.` |
 | `PlayLandingFlyHeadingMsg` | `{callsign}, fly heading {heading}. Expect runway {runway}.` |
 | `PlayClearedToLandCarrierMsg` | `{callsign}, cleared to land on carrier.` |
+| `PlayWaitForCatapultClearanceMsg` | `{callsign}, wait for catapult clearance.` |
 | `PlayVerticalLandingFlyHeadingMsg` | `{callsign}, fly heading {heading}.` |
 | `PlayClearedVerticalTakeoffMsg` | `{callsign}, cleared for vertical takeoff.` |
 | `PlayClearedVerticalLandingMsg` | `{callsign}, cleared to land on pad {pad}.` |

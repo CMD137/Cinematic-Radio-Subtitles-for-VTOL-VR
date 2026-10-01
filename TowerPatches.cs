@@ -57,6 +57,15 @@ namespace Cmd137.CinematicRadioSubtitles
         }
     }
 
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayWaitForCatapultClearanceMsg")]
+    internal static class WaitForCatapultClearancePatch
+    {
+        private static void Postfix()
+        {
+            RadioText.Tower(RadioText.Callsign() + ", wait for catapult clearance.");
+        }
+    }
+
     [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLandingPatternFullMsg")]
     internal static class LandingPatternFullPatch
     {
