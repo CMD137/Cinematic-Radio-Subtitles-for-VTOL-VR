@@ -9,6 +9,7 @@ namespace Cmd137.CinematicRadioSubtitles
     {
         Tower,
         Lso,
+        GroundCrew,
         Awacs
     }
 
@@ -171,6 +172,7 @@ namespace Cmd137.CinematicRadioSubtitles
             {
                 case RadioSource.Awacs: return "AWACS";
                 case RadioSource.Lso: return "LSO";
+                case RadioSource.GroundCrew: return "GROUND CREW";
                 default: return "TOWER";
             }
         }
@@ -181,6 +183,7 @@ namespace Cmd137.CinematicRadioSubtitles
             {
                 case RadioSource.Awacs: return "83D7FF";
                 case RadioSource.Lso: return "FFD27D";
+                case RadioSource.GroundCrew: return "D4C6FF";
                 default: return "B8EFA6";
             }
         }

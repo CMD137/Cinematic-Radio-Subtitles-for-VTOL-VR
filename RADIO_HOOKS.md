@@ -85,6 +85,21 @@ The existing list-based `ReportPopups(List<ContactGroup>, int, int)` route remai
 
 `BRAA` is used when no Bullseye is available; otherwise the same geometry is labelled `BULLSEYE`. The values are calculated from the game-supplied contact position and velocity at dispatch time.
 
+## Ground crew coverage added in v1.2
+
+| Game message identifier | Vanilla static evidence | Rendered subtitle |
+| --- | --- | --- |
+| `GroundCrewMessages.NotAvailable` | `rearmingNotAvailableClips` | `Rearming is not available.` |
+| `GroundCrewMessages.IsAirborne` | `isAirborneClips` | `Unable. Aircraft is airborne.` |
+| `GroundCrewMessages.TaxiToStation` | `taxiToStationClips` | `Taxi to the rearming station.` |
+| `GroundCrewMessages.EnteredStation` | `enteredRearmingStationClips` | `You have entered the rearming station.` |
+| `GroundCrewMessages.TurnOffEngines` | `turnOffEnginesClips` | `Please turn off your engines.` |
+| `GroundCrewMessages.DisarmWeapons` | `disarmWeaponsClips` | `Please disarm your weapons.` |
+| `GroundCrewMessages.Success` | `successClips` | `Rearming complete.` |
+| `GroundCrewMessages.ReturnedToVehicle` | `returnedToVehicleClips` | `Ground crew returning to vehicle.` |
+
+All eight entries are dispatched through `GroundCrewVoiceProfile.PlayMessage(...)`. The message enum is internal to the game assembly, so the Harmony postfix receives its first parameter generically and matches its stable enum name. The compiled profile exposes clip-list and enum names, but no editable sentence transcript. Accordingly, these are clear English templates matched to the original message identifiers, and should be verified against each voice variant in game.
+
 ## Deliberately not treated as text sources
 
 `CommRadioManager` can play arbitrary clips, while scenario actions such as `VTSRadioMessagePlayer.PlayMessage(string audioPath, bool copilot)` receive only an audio path. They do not expose reliable English text, so this mod does not claim to generate original-English subtitles from them automatically.

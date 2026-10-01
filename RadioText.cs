@@ -20,6 +20,14 @@ namespace Cmd137.CinematicRadioSubtitles
             }
         }
 
+        internal static void GroundCrew(string message, float? minimumDuration = null)
+        {
+            if (CinematicRadioSubtitles.Subtitles != null)
+            {
+                CinematicRadioSubtitles.Subtitles.Push(RadioSource.GroundCrew, message, DurationFor(message, minimumDuration, 5f, 14f) + 2f);
+            }
+        }
+
         internal static void Awacs(string message, float? minimumDuration = null)
         {
             if (CinematicRadioSubtitles.Subtitles != null)

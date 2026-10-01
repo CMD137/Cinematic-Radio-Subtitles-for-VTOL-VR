@@ -13,7 +13,7 @@ namespace Cmd137.CinematicRadioSubtitles
         {
             Subtitles = gameObject.AddComponent<SubtitleService>();
             DontDestroyOnLoad(gameObject);
-            Debug.Log("Cinematic Radio Subtitles v1.1.1 loaded.");
+            Debug.Log("Cinematic Radio Subtitles v1.2 loaded.");
         }
 
         public override void UnLoad()

@@ -11,7 +11,7 @@ Steam Workshop: <https://steamcommunity.com/sharedfiles/filedetails/?id=38107889
 
 Chinese README: [README-zh.md](README-zh.md)
 
-## v1.1.1
+## v1.2
 
 - Tower and LSO calls
 - AWACS calls, with compact BRAA and Bullseye-style formatting where possible
@@ -22,12 +22,15 @@ Chinese README: [README-zh.md](README-zh.md)
 - Reading-time subtitle duration: length now follows the amount of English
   text, plus 2 seconds for Tower / LSO calls and 4 seconds for AWACS calls
 - Carrier landing clearance and all close-in LSO correction calls
+- Ground crew rearming calls, including station, engine, disarm, completion,
+  and return-to-vehicle messages
 - A two-line subtitle: coloured speaker label plus the current radio message
 - A comfortable stereo depth that lets both eyes fuse the subtitle naturally
 
 ## How it works
 
-The mod uses focused Harmony hooks at the game's Tower / LSO and AWACS radio
+The mod uses focused Harmony hooks at the game's Tower / LSO, AWACS, and ground
+crew radio
 dispatch points. When a supported NPC transmission is played, the hook receives
 its parameters and sends a matching English subtitle to this mod's own Unity
 Canvas overlay.
