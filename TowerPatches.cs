@@ -48,6 +48,15 @@ namespace Cmd137.CinematicRadioSubtitles
         }
     }
 
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayClearedToLandCarrierMsg")]
+    internal static class ClearedCarrierLandingPatch
+    {
+        private static void Postfix()
+        {
+            RadioText.Tower(RadioText.Callsign() + ", cleared to land on carrier.");
+        }
+    }
+
     [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLandingPatternFullMsg")]
     internal static class LandingPatternFullPatch
     {
@@ -217,5 +226,65 @@ namespace Cmd137.CinematicRadioSubtitles
         {
             RadioText.Lso((idx + 1) + " wire!");
         }
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLSOComeLeft")]
+    internal static class LsoComeLeftPatch
+    {
+        private static void Postfix() => RadioText.Lso("Come left.");
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLSOHighLeft")]
+    internal static class LsoHighLeftPatch
+    {
+        private static void Postfix() => RadioText.Lso("You're high left.");
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLSOHighRight")]
+    internal static class LsoHighRightPatch
+    {
+        private static void Postfix() => RadioText.Lso("You're high right.");
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLSOLinedUp")]
+    internal static class LsoLinedUpPatch
+    {
+        private static void Postfix() => RadioText.Lso("Lined up.");
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLSOLowLeft")]
+    internal static class LsoLowLeftPatch
+    {
+        private static void Postfix() => RadioText.Lso("You're low left.");
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLSOLowRight")]
+    internal static class LsoLowRightPatch
+    {
+        private static void Postfix() => RadioText.Lso("You're low right.");
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLSOPowerLow")]
+    internal static class LsoPowerLowPatch
+    {
+        private static void Postfix() => RadioText.Lso("Power, power.");
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLSOReturnToHolding")]
+    internal static class LsoReturnToHoldingPatch
+    {
+        private static void Postfix() => RadioText.Lso("Return to holding.");
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLSORightForLineup")]
+    internal static class LsoRightForLineupPatch
+    {
+        private static void Postfix() => RadioText.Lso("Right for lineup.");
+    }
+
+    [HarmonyPatch(typeof(ATCVoiceProfile), "PlayLSOYoureHigh")]
+    internal static class LsoYoureHighPatch
+    {
+        private static void Postfix() => RadioText.Lso("You're high.");
     }
 }

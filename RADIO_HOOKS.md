@@ -32,6 +32,7 @@ The game's player-landing routines call these branches alongside the already cov
 | `PlayClearForTakeoffRunwayMsg` | `{callsign}, cleared for takeoff, runway {runway}.` |
 | `PlayLandingClearedForRunwayMsg` | `{callsign}, cleared to land, runway {runway}.` |
 | `PlayLandingFlyHeadingMsg` | `{callsign}, fly heading {heading}. Expect runway {runway}.` |
+| `PlayClearedToLandCarrierMsg` | `{callsign}, cleared to land on carrier.` |
 | `PlayVerticalLandingFlyHeadingMsg` | `{callsign}, fly heading {heading}.` |
 | `PlayClearedVerticalTakeoffMsg` | `{callsign}, cleared for vertical takeoff.` |
 | `PlayClearedVerticalLandingMsg` | `{callsign}, cleared to land on pad {pad}.` |
@@ -45,6 +46,16 @@ The game's player-landing routines call these branches alongside the already cov
 | `PlayLSOFoulDeck` | `Foul deck, wave off!` |
 | `PlayLSOBolter` | `Bolter, bolter!` |
 | `PlayLSOXwire` | `{wire} wire!` |
+| `PlayLSOComeLeft` | `Come left.` |
+| `PlayLSOHighLeft` | `You're high left.` |
+| `PlayLSOHighRight` | `You're high right.` |
+| `PlayLSOLinedUp` | `Lined up.` |
+| `PlayLSOLowLeft` | `You're low left.` |
+| `PlayLSOLowRight` | `You're low right.` |
+| `PlayLSOPowerLow` | `Power, power.` |
+| `PlayLSOReturnToHolding` | `Return to holding.` |
+| `PlayLSORightForLineup` | `Right for lineup.` |
+| `PlayLSOYoureHigh` | `You're high.` |
 
 `{runway}`, `{heading}`, `{pad}`, `{catapult}`, and `{wire}` are populated from the original dispatch method parameters. Tower and carrier services share `ATCVoiceProfile`; the LSO calls above are dispatched by that same profile.
 

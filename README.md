@@ -11,7 +11,7 @@ Steam Workshop: <https://steamcommunity.com/sharedfiles/filedetails/?id=38107889
 
 Chinese README: [README-zh.md](README-zh.md)
 
-## v1.1
+## v1.1.1
 
 - Tower and LSO calls
 - AWACS calls, with compact BRAA and Bullseye-style formatting where possible
@@ -20,10 +20,10 @@ Chinese README: [README-zh.md](README-zh.md)
 - The remaining AWACS report paths, including threat, unable, and legacy popup
   reports
 - Reading-time subtitle duration: length now follows the amount of English
-  text, with source-specific minimum and maximum limits
+  text, plus 2 seconds for Tower / LSO calls and 4 seconds for AWACS calls
+- Carrier landing clearance and all close-in LSO correction calls
 - A two-line subtitle: coloured speaker label plus the current radio message
 - A comfortable stereo depth that lets both eyes fuse the subtitle naturally
-- English-only subtitle layer: it does not translate radio calls
 
 ## How it works
 

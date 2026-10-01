@@ -8,7 +8,7 @@ namespace Cmd137.CinematicRadioSubtitles
         {
             if (CinematicRadioSubtitles.Subtitles != null)
             {
-                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Tower, message, DurationFor(message, minimumDuration, 5f, 14f));
+                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Tower, message, DurationFor(message, minimumDuration, 5f, 14f) + 2f);
             }
         }
 
@@ -16,7 +16,7 @@ namespace Cmd137.CinematicRadioSubtitles
         {
             if (CinematicRadioSubtitles.Subtitles != null)
             {
-                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Lso, message, DurationFor(message, minimumDuration, 3f, 8f));
+                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Lso, message, DurationFor(message, minimumDuration, 3f, 8f) + 2f);
             }
         }
 
@@ -24,7 +24,7 @@ namespace Cmd137.CinematicRadioSubtitles
         {
             if (CinematicRadioSubtitles.Subtitles != null)
             {
-                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Awacs, message, DurationFor(message, minimumDuration, 6f, 16f));
+                CinematicRadioSubtitles.Subtitles.Push(RadioSource.Awacs, message, DurationFor(message, minimumDuration, 6f, 16f) + 4f);
             }
         }
 
